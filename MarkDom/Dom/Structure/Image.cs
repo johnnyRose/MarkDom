@@ -1,0 +1,25 @@
+﻿namespace MarkDom.Dom.Structure
+{
+    public class Image : DomItem
+    {
+        public string Url { get; set; }
+
+        public string AltText { get; set; }
+
+        public override bool IsPreFormatted => true;
+
+        public override bool IsValidTopLevelTag => false;
+
+        public Image(MarkdownMatch match)
+            : base(match)
+        {
+            this.Url = match.Groups["url"].Value;
+            this.AltText = match.Groups["alttext"].Value;
+        }
+
+        public override string ToHtml()
+        {
+            return $"<img src=\"{Url}\" alt=\"{AltText}\" />";
+        }
+    }
+}
