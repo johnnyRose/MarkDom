@@ -59,12 +59,9 @@ namespace MarkDom
 
             { BuildRegex(@"~~(?<capture>.*)~~"), match => new Strikethrough(match) },
 
-            { BuildRegex(@"^>(?<capture>(.|\s)+)"), match =>
-            {
-                return new Blockquote(match);
-                //string token = Regex.Replace(match.Groups["capture"].Value, "(\n|\r\n)>", "");
-                //return new TransformResult($"<blockquote><p>{token}</p></blockquote>");
-            } },
+            { BuildRegex(@"^>(?<capture>(.|\s)+)"), match => new Blockquote(match) },
+
+            { BuildRegex(@"^(?<capture><.+)"), match => new HtmlTag(match) },
 
             { BuildRegex(@"^\s+$"), token => token.Parent },
         };
@@ -83,6 +80,30 @@ namespace MarkDom
             foreach (string section in sections)
             {
                 DomItem domSection = ParseRecursive(new DomSection(section));
+
+                if (domSection.Children.Count == 0)
+                {
+                    DomSection newDomSection = new DomSection(domSection.Value);
+                    Paragraph paragraph = new Paragraph(newDomSection.Value, newDomSection);
+                    newDomSection.Children.Add(paragraph);
+                    newDomSection.Value = paragraph.UniqueKey;
+                    domSection = newDomSection;
+                }
+                else if (!domSection.Children.First().IsValidTopLevelTag)
+                {
+                    Paragraph newChild = new Paragraph(domSection.Value, domSection);
+
+                    foreach (var child in domSection.Children)
+                    {
+                        child.Parent = newChild;
+                        newChild.Children.Add(child);
+                    }
+
+                    domSection.Children.Clear();
+                    domSection.Children.Add(newChild);
+                    domSection.Value = newChild.UniqueKey;
+                }
+
                 domSections.Add(domSection);
             }
 

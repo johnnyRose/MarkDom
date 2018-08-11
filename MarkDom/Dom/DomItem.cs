@@ -48,11 +48,6 @@ namespace MarkDom.Dom
                 value = value.Replace(child.UniqueKey, childHtml);
             }
 
-            if (this.IsTopLevel && !this.IsValidTopLevelTag)
-            {
-                value = $"<p>{value}</p>";
-            }
-
             return value;
         }
     }
