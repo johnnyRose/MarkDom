@@ -2,7 +2,7 @@
 {
     public class DomSection : DomItem
     {
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public DomSection(string text)
             : base(match: null)

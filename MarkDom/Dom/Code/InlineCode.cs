@@ -2,7 +2,7 @@
 {
     public class InlineCode : CodeBase
     {
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public InlineCode(MarkdownMatch match)
             : base(match)

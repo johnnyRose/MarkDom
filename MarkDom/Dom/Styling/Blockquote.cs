@@ -2,7 +2,7 @@
 {
     public class Blockquote : DomItem
     {
-        public override bool IsValidTopLevelTag => true;
+        public override bool IsBlockLevelElement => true;
 
         public Blockquote(MarkdownMatch match)
             : base(match)

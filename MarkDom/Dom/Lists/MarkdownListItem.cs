@@ -2,7 +2,7 @@
 {
     public class MarkdownListItem : DomItem
     {
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public MarkdownListItem(string value, DomItem parent, MarkdownParser recursiveParser)
             : base(value, parent)

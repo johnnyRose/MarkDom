@@ -12,7 +12,7 @@ namespace MarkDom.Dom
 
         public virtual bool IsPreFormatted { get; }
 
-        public abstract bool IsValidTopLevelTag { get; }
+        public abstract bool IsBlockLevelElement { get; }
 
         public DomItem Parent { get; set; }
 

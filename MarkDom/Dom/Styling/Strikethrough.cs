@@ -2,7 +2,7 @@
 {
     public class Strikethrough : DomItem
     {
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public Strikethrough(MarkdownMatch match)
             : base(match)

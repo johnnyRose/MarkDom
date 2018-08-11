@@ -89,7 +89,7 @@ namespace MarkDom
                     newDomSection.Value = paragraph.UniqueKey;
                     domSection = newDomSection;
                 }
-                else if (!domSection.Children.First().IsValidTopLevelTag)
+                else if (!domSection.Children.First().IsBlockLevelElement)
                 {
                     Paragraph newChild = new Paragraph(domSection.Value, domSection);
 

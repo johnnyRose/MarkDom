@@ -12,7 +12,7 @@ namespace MarkDom.Dom.Lists
 
         public string ItemDelimiterRegex { get; set; }
 
-        public override bool IsValidTopLevelTag => true;
+        public override bool IsBlockLevelElement => true;
 
         public override bool IsPreFormatted => true;
 

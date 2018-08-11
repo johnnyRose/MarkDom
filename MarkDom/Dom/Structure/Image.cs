@@ -8,7 +8,7 @@
 
         public override bool IsPreFormatted => true;
 
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public Image(MarkdownMatch match)
             : base(match)

@@ -2,7 +2,7 @@
 {
     public class H1 : HeaderBase
     {
-        public override bool IsValidTopLevelTag => true;
+        public override bool IsBlockLevelElement => true;
 
         public H1(MarkdownMatch match)
             : base(match)

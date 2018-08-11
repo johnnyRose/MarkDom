@@ -2,7 +2,7 @@
 {
     public class Bold : DomItem
     {
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public Bold(MarkdownMatch match)
             : base(match)

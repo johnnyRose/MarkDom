@@ -2,7 +2,7 @@
 {
     public class Italics : DomItem
     {
-        public override bool IsValidTopLevelTag => false;
+        public override bool IsBlockLevelElement => false;
 
         public Italics(MarkdownMatch match)
             : base(match)
