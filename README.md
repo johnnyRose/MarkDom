@@ -2,7 +2,7 @@
 
 MarkDom is a Markdown parser implemented in C# using recursion and regular expressions.
 
-Instead of simply replacing the input Markdown with HTML output, MarkDom generates a simple Document Object Model to allow analysis or modification of the structured Markdown data.
+An advantage to markdom is that instead of simply replacing the input Markdown with HTML output, MarkDom generates a simple Document Object Model to enable interaction with the structured Markdown data.
 
 Another advantage to this approach is to allow transformation to formats other than HTML, such as PDF, Word, or any other formatted document.
 

@@ -7,7 +7,6 @@
         public H3(MarkdownMatch match)
             : base(match)
         {
-            match.RecursiveParser.ParseRecursive(this);
         }
 
         public override string ToHtml()
