@@ -70,7 +70,7 @@ namespace MarkDom
 
         public DomDocument Parse(string markdown)
         {
-            var domSections = new List<DomItem>();
+            var domSections = new List<DomSection>();
 
             var sections = GetDocumentSections(markdown);
 

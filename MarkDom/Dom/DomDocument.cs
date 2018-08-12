@@ -6,9 +6,9 @@ namespace MarkDom.Dom
 {
     public class DomDocument : IHtmlTransform
     {
-        public List<DomItem> DomSections { get; }
+        public List<DomSection> DomSections { get; }
 
-        public DomDocument(List<DomItem> domSections)
+        public DomDocument(List<DomSection> domSections)
         {
             this.DomSections = domSections;
         }
