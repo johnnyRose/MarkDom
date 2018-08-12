@@ -101,9 +101,7 @@ namespace MarkDom
                 return parent;
             }
 
-            parent.Children.Add(domItem);
-            parent.Value = parent.Value.Replace(domItem.FullMatchValue, domItem.UniqueKey);
-
+            parent.AddChild(domItem);
             ParseRecursive(parent);
 
             return parent;

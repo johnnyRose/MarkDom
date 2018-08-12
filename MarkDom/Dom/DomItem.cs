@@ -41,7 +41,7 @@ namespace MarkDom.Dom
 
         public abstract string ToHtml();
 
-        protected string BuildChildHtml(bool topLevel = false, string overrideValue = null)
+        protected string BuildChildHtml(string overrideValue = null)
         {
             string value = overrideValue ?? Value;
 
@@ -52,6 +52,12 @@ namespace MarkDom.Dom
             }
 
             return value;
+        }
+
+        public void AddChild(DomItem child)
+        {
+            this.Children.Add(child);
+            this.Value = this.Value.Replace(child.FullMatchValue, child.UniqueKey);
         }
     }
 }

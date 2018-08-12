@@ -13,7 +13,7 @@
 
         public override string ToHtml()
         {
-            return Value;
+            return BuildChildHtml();
         }
     }
 }
