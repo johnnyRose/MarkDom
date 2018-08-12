@@ -96,13 +96,11 @@ namespace MarkDom
         {
             DomItem domItem = _matchRules.GetEarliestMatch(parent.Value, parent, recursiveParser: this)?.DoTransform();
 
-            if (domItem == null)
+            if (domItem != null)
             {
-                return parent;
+                parent.AddChild(domItem);
+                ParseRecursive(parent);
             }
-
-            parent.AddChild(domItem);
-            ParseRecursive(parent);
 
             return parent;
         }
