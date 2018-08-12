@@ -23,7 +23,7 @@ namespace MarkDom
                 }
             }
 
-            if (minPositionMatch != null)
+            if (minPositionMatch != null && minRule != null)
             {
                 return new MarkdownMatch(markdown, minPositionMatch, minRule, parent, recursiveParser);
             }

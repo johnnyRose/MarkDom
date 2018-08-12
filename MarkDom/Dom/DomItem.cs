@@ -10,30 +10,33 @@ namespace MarkDom.Dom
 
         public string FullMatchValue { get; set; }
 
-        public virtual bool IsPreFormatted { get; }
+        protected internal virtual bool IsPreFormatted { get; }
 
         public abstract bool IsBlockLevelElement { get; }
 
         public DomItem Parent { get; set; }
 
-        public virtual List<DomItem> Children { get; set; }
+        public List<DomItem> Children { get; set; }
 
         public string UniqueKey { get; }
 
-        public bool IsTopLevel => GetType() == typeof(DomSection);
-
         public DomItem(MarkdownMatch match)
-            : this(match?.Groups["capture"].Value, match?.Parent)
+            : this(match?.Groups["capture"].Value, match?.Parent, match?.RecursiveParser)
         {
             this.FullMatchValue = match?.MatchValue;
         }
 
-        public DomItem(string value, DomItem parent)
+        public DomItem(string value, DomItem parent, MarkdownParser recursiveParser)
         {
             this.Value = value;
             this.Parent = parent;
             this.Children = new List<DomItem>();
             this.UniqueKey = "{{{" + Guid.NewGuid().ToString() + "}}}";
+
+            if (!this.IsPreFormatted && recursiveParser != null)
+            {
+                recursiveParser.ParseRecursive(this);
+            }
         }
 
         public abstract string ToHtml();

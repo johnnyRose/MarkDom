@@ -4,7 +4,7 @@
     {
         public override bool IsBlockLevelElement => true;
 
-        public override bool IsPreFormatted => true;
+        protected internal override bool IsPreFormatted => true;
 
         public HorizontalRule(MarkdownMatch match)
             : base(match)

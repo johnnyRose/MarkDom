@@ -4,8 +4,8 @@
     {
         public override bool IsBlockLevelElement => true;
 
-        public Paragraph(string value, DomItem parent)
-            : base(value, parent)
+        public Paragraph(string value, DomItem parent, MarkdownParser recursiveParser)
+            : base(value, parent, recursiveParser)
         {
         }
 

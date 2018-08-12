@@ -5,10 +5,9 @@
         public override bool IsBlockLevelElement => false;
 
         public MarkdownListItem(string value, DomItem parent, MarkdownParser recursiveParser)
-            : base(value, parent)
+            : base(value, parent, recursiveParser)
         {
             this.FullMatchValue = value;
-            recursiveParser.ParseRecursive(this);
         }
 
         public override string ToHtml()

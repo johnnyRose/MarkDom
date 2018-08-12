@@ -7,6 +7,7 @@
         public H4(MarkdownMatch match)
             : base(match)
         {
+            match.RecursiveParser.ParseRecursive(this);
         }
 
         public override string ToHtml()

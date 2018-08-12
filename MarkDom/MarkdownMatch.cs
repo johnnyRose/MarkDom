@@ -12,11 +12,11 @@ namespace MarkDom
 
         public GroupCollection Groups { get; }
 
-        private Func<MarkdownMatch, DomItem> _transform;
+        private readonly Func<MarkdownMatch, DomItem> _transform;
 
-        public DomItem Parent { get; set; }
+        public DomItem Parent { get; }
 
-        public MarkdownParser RecursiveParser { get; set; }
+        internal MarkdownParser RecursiveParser { get; }
 
         public MarkdownMatch(string original, Match match, Func<MarkdownMatch, DomItem> transform, DomItem parent, MarkdownParser recursiveParser)
         {

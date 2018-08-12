@@ -6,7 +6,7 @@
 
         public string LinkText { get; set; }
 
-        public override bool IsPreFormatted => true;
+        protected internal override bool IsPreFormatted => true;
 
         public override bool IsBlockLevelElement => false;
 

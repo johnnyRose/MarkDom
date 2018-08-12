@@ -28,10 +28,7 @@ namespace MarkDom
         private readonly MatchRules _matchRules;
         private static readonly MatchRules _defaultMatchRules = new MatchRules()
         {
-            { BuildRegex(@"```(?<capture>.*?(\r\n|\n)(.|\s)+?)```"), match =>
-            {
-                return new BlockCode(match);
-            } },
+            { BuildRegex(@"```(?<capture>.*?(\r\n|\n)(.|\s)+?)```"), match => new BlockCode(match) },
 
             { BuildRegex(@"`(?<capture>.*?)`"), match => new InlineCode(match) },
 
@@ -79,31 +76,8 @@ namespace MarkDom
 
             foreach (string section in sections)
             {
-                DomItem domSection = ParseRecursive(new DomSection(section));
-
-                if (domSection.Children.Count == 0)
-                {
-                    DomSection newDomSection = new DomSection(domSection.Value);
-                    Paragraph paragraph = new Paragraph(newDomSection.Value, newDomSection);
-                    newDomSection.Children.Add(paragraph);
-                    newDomSection.Value = paragraph.UniqueKey;
-                    domSection = newDomSection;
-                }
-                else if (!domSection.Children.First().IsBlockLevelElement)
-                {
-                    Paragraph newChild = new Paragraph(domSection.Value, domSection);
-
-                    foreach (var child in domSection.Children)
-                    {
-                        child.Parent = newChild;
-                        newChild.Children.Add(child);
-                    }
-
-                    domSection.Children.Clear();
-                    domSection.Children.Add(newChild);
-                    domSection.Value = newChild.UniqueKey;
-                }
-
+                DomSection domSection = (DomSection)ParseRecursive(new DomSection(section));
+                domSection.EnsureIsValidTopLevel(this);
                 domSections.Add(domSection);
             }
 
@@ -118,10 +92,9 @@ namespace MarkDom
                 .ToList();
         }
 
-        internal DomItem ParseRecursive(DomItem parent, bool lookingForSiblings = false)
+        internal DomItem ParseRecursive(DomItem parent)
         {
-            string markdownInput = parent.Value;
-            DomItem domItem = _matchRules.GetEarliestMatch(markdownInput, parent, recursiveParser: this)?.DoTransform();
+            DomItem domItem = _matchRules.GetEarliestMatch(parent.Value, parent, recursiveParser: this)?.DoTransform();
 
             if (domItem == null)
             {
@@ -131,12 +104,7 @@ namespace MarkDom
             parent.Children.Add(domItem);
             parent.Value = parent.Value.Replace(domItem.FullMatchValue, domItem.UniqueKey);
 
-            if (!domItem.IsPreFormatted)
-            {
-                ParseRecursive(domItem);
-            }
-
-            ParseRecursive(parent, lookingForSiblings: true);
+            ParseRecursive(parent);
 
             return parent;
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace MarkDom.Dom.Lists
@@ -8,13 +7,11 @@ namespace MarkDom.Dom.Lists
     {
         public bool IsOrdered { get; set; }
 
-        public override List<DomItem> Children { get; set; }
-
         public string ItemDelimiterRegex { get; set; }
 
         public override bool IsBlockLevelElement => true;
 
-        public override bool IsPreFormatted => true;
+        protected internal override bool IsPreFormatted => true;
 
         public MarkdownList(MarkdownMatch match)
             : base(match)
